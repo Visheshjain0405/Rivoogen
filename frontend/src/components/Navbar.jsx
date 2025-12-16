@@ -65,13 +65,14 @@ export default function Navbar() {
     <>
    <nav
   style={{
+    backgroundColor: colors.background,
     borderBottom: `1px solid ${colors.border}`,
   }}
   className="w-full sticky top-0 z-40 backdrop-blur-sm relative"
 >
         {/* Decorative Top Border */}
         <div
-           className="h-1 w-full relative z-10"
+          className="h-1 w-full"
           style={{
             background: `linear-gradient(90deg, ${colors.carbonBlack} 0%, ${colors.alabasterGrey} 50%, ${colors.carbonBlack} 100%)`,
           }}
@@ -138,13 +139,14 @@ export default function Navbar() {
                       {/* Services Dropdown */}
                       {showServicesDropdown && (
                         <div
-                          className="absolute top-full left-0 w-72 z-50"
+                          className="absolute top-full left-0 w-72"
                           style={{ marginTop: "-1px" }}
                         >
                           <div
                             className="rounded-2xl shadow-xl overflow-hidden"
                             style={{
                               backgroundColor: colors.background,
+                              border: `2px solid ${colors.border}`,
                               boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
                             }}
                           >
@@ -345,17 +347,7 @@ export default function Navbar() {
         </div>
 
         {/* Subtle Shadow at bottom of navbar */}
-        {/* <div
-          className="absolute bottom-0 left-0 right-0 h-px z-10"
-          style={{
-            background: `linear-gradient(
-            90deg,
-            transparent 0%,
-            ${colors.border} 50%,
-            transparent 100%
-          )`,
-          }}
-        /> */}
+       
       </nav>
       <GetAQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </>
