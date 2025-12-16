@@ -63,24 +63,23 @@ export default function Navbar() {
 
   return (
     <>
-      <nav
-        style={{
-          backgroundColor: colors.background,
-          borderBottom: `1px solid ${colors.border}`,
-        }}
-        className="w-full sticky top-0 z-50 backdrop-blur-sm"
-      >
+   <nav
+  style={{
+    borderBottom: `1px solid ${colors.border}`,
+  }}
+  className="w-full sticky top-0 z-40 backdrop-blur-sm relative"
+>
         {/* Decorative Top Border */}
         <div
-          className="h-1 w-full"
+           className="h-1 w-full relative z-10"
           style={{
             background: `linear-gradient(90deg, ${colors.carbonBlack} 0%, ${colors.alabasterGrey} 50%, ${colors.carbonBlack} 100%)`,
           }}
         />
 
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="w-full px-6">
           <div className="flex items-center justify-between py-5">
-            {/* Logo Section */}
+            {/* Logo Section - Left aligned */}
             <div
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => navigate("/")}
@@ -101,8 +100,8 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Desktop Menu */}
-            <ul className="hidden lg:flex items-center gap-1">
+            {/* Desktop Menu - Centered */}
+            <ul className="hidden lg:flex items-center gap-1 absolute left-1/2 transform -translate-x-1/2">
               {menuItems.map((item) => (
                 <li key={item.name} className="relative">
                   {item.name === "Services" ? (
@@ -136,17 +135,16 @@ export default function Navbar() {
                         />
                       </button>
 
-                      {/* Services Dropdown - Removed gap */}
+                      {/* Services Dropdown */}
                       {showServicesDropdown && (
                         <div
-                          className="absolute top-full left-0 pt-2 w-72"
-                          style={{ marginTop: '0px' }}
+                          className="absolute top-full left-0 w-72 z-50"
+                          style={{ marginTop: "-1px" }}
                         >
                           <div
                             className="rounded-2xl shadow-xl overflow-hidden"
                             style={{
                               backgroundColor: colors.background,
-                              border: `2px solid ${colors.border}`,
                               boxShadow: "0 10px 40px rgba(0, 0, 0, 0.1)",
                             }}
                           >
@@ -268,23 +266,25 @@ export default function Navbar() {
                     {item.name === "Services" ? (
                       <div>
                         <button
-                          onClick={() => setActiveItem(item.name)}
+                          onClick={() => {
+                            // Toggle services submenu visibility
+                            const submenu = document.getElementById(`services-submenu`);
+                            if (submenu) {
+                              submenu.style.display = submenu.style.display === 'none' ? 'block' : 'none';
+                            }
+                          }}
                           className="w-full text-left px-4 py-3 rounded-lg font-medium transition-all duration-300 flex items-center justify-between"
                           style={{
                             fontSize: "16px",
-                            color:
-                              activeItem === item.name
-                                ? colors.carbonBlack
-                                : colors.text,
-                            backgroundColor:
-                              activeItem === item.name ? colors.surface : "transparent",
+                            color: colors.text,
+                            backgroundColor: "transparent",
                           }}
                         >
                           {item.name}
                           <ChevronDown className="w-4 h-4" />
                         </button>
-                        {/* Mobile Services Submenu */}
-                        <div className="ml-4 mt-2 space-y-1">
+                        {/* Mobile Services Submenu - Hidden by default */}
+                        <div id="services-submenu" className="ml-4 mt-2 space-y-1" style={{ display: 'none' }}>
                           {services.map((service) => (
                             <button
                               key={service.name}
@@ -345,8 +345,8 @@ export default function Navbar() {
         </div>
 
         {/* Subtle Shadow at bottom of navbar */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-px"
+        {/* <div
+          className="absolute bottom-0 left-0 right-0 h-px z-10"
           style={{
             background: `linear-gradient(
             90deg,
@@ -355,7 +355,7 @@ export default function Navbar() {
             transparent 100%
           )`,
           }}
-        />
+        /> */}
       </nav>
       <GetAQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </>
