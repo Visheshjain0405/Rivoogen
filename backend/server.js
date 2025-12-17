@@ -5,12 +5,18 @@ const nodemailer = require("nodemailer");
 const app = express();
 const PORT = 5001;
 
+require("dotenv").config();
+
+
 // -------------------------------------------
-// 🔥 EMAIL CREDENTIALS
 // -------------------------------------------
-const MAIL_USER = "";
-const MAIL_PASS = "";
-const ADMIN_EMAIL = "";
+// 🔥 EMAIL CREDENTIALS (FROM .env)
+// -------------------------------------------
+const MAIL_USER = process.env.MAIL_USER;
+const MAIL_PASS = process.env.MAIL_PASS;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+
+
 
 // -------------------------------------------
 // THEME COLORS
