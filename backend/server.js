@@ -36,7 +36,22 @@ const LOGO_URL = "https://res.cloudinary.com/djh2ro9tm/image/upload/v1764413088/
 const COMPANY_NAME = "Rivoogen";
 const COMPANY_WEBSITE = "https://rivoogen.com";
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://rivoogen.com",
+      "https://rivoogen.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
+// Handle preflight explicitly
+app.options("*", cors());
+
 app.use(express.json());
 
 // -------------------------------------------
