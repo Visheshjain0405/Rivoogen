@@ -62,9 +62,15 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify((error) => {
-  console.log(error ? "❌ Mail Error" : "✅ Mail Transporter Ready");
-});
+(async () => {
+  try {
+    await transporter.verify();
+    console.log("✅ Mail Transporter Ready");
+  } catch (err) {
+    console.error("❌ Mail Transporter Error:", err.message);
+  }
+})();
+
 
 // ========================================================================
 // ⭐ EMAIL BASE TEMPLATE
