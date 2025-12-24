@@ -55,12 +55,21 @@ app.use(express.json());
 // 🔥 MAIL TRANSPORTER
 // -------------------------------------------
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // MUST be false for 587
   auth: {
     user: MAIL_USER,
-    pass: MAIL_PASS,
+    pass: MAIL_PASS, // App password
   },
+  tls: {
+    rejectUnauthorized: false,
+  },
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
 });
+
 
 (async () => {
   try {
